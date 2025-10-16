@@ -1,0 +1,265 @@
+/* === Search Bar === */
+.search-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 40px 0;
+  box-sizing: border-box;
+}
+
+.search__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 6px 14px;
+  width: 240px;
+}
+
+.search__input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  background: transparent;
+  color: #032b41;
+}
+
+.search__icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.search__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* === Overall Page Layout === */
+.player-container {
+  background-color: #fff;
+  color: #032b41;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 60px 120px; /* bottom padding for audio bar space */
+  box-sizing: border-box;
+}
+
+/* === Title === */
+.player-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* === Summary Section === */
+.player-summary {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line; /* ensures paragraph spacing */
+  color: #394547;
+}
+
+/* === AUDIO PLAYER BAR === */
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* 👈 full screen */
+  background-color: #032b41;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  z-index: 9999; /* 👈 ensures it sits above sidebar */
+}
+
+
+
+/* === LEFT SECTION (Book Info) === */
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-cover {
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.player-book-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.player-book-author {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* === CENTER SECTION (Controls) === */
+.player-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.play-btn {
+  background-color: #fff;
+  border: none;
+  color: #032b41;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.skip-btn {
+  background: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.skip-btn:hover {
+  opacity: 0.8;
+}
+
+/* === RIGHT SECTION (Slider + Time) === */
+.player-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 220px;
+  justify-content: flex-end;
+}
+
+.player-slider {
+  width: 100px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: #fff;
+}
+
+.time {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+
+/* === Book Info Left Section === */
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-cover {
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.player-book-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.player-book-author {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* === Controls Center === */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.player-controls button:hover {
+  opacity: 0.8;
+}
+
+.play-btn {
+  font-size: 22px;
+}
+
+/* === Timer Right === */
+.player-timer {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* === Loading / Error Styles === */
+.loading,
+.error {
+  text-align: center;
+  margin-top: 200px;
+  font-size: 16px;
+}
+
+.error {
+  color: #c0392b;
+}
+
+/* === ICONS === */
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.play-btn .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* optional subtle animation */
+.play-btn:active {
+  transform: scale(0.95);
+}

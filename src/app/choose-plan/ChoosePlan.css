@@ -1,0 +1,227 @@
+/* 🌊 HEADER SECTION */
+.choose-plan {
+  min-height: 100vh;
+  background-color: #fff;
+  color: #032b41;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Top Header */
+.choose-plan__header {
+  position: relative;
+  background-color: #032b41;
+  color: white;
+  text-align: center;
+  padding: 80px 20px 160px;
+  border-bottom-left-radius: 250px;
+  border-bottom-right-radius: 250px;
+  overflow: hidden;
+}
+
+.choose-plan__text h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.choose-plan__text p {
+  font-size: 0.95rem;
+  color: #c8d1da;
+}
+
+.choose-plan__illustration {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 💡 FEATURES */
+.features {
+  display: flex;                /* make children sit in a row */
+  justify-content: center;      /* center horizontally */
+  align-items: flex-start;      /* align to top */
+  gap: 80px;                    /* space between each feature */
+  text-align: center;
+  margin-top: 100px;
+  flex-wrap: nowrap;            /* keep all in one row */
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;                 /* fixed width keeps them aligned */
+}
+
+.feature-icon {
+  margin-bottom: 12px;
+}
+
+.feature-icon svg {
+  width: 45px;
+  height: 45px;
+  fill: #032b41;
+}
+
+.feature-title {
+  font-size: 0.95rem;
+  color: #032b41;
+  line-height: 1.5;
+}
+
+.feature-title strong {
+  font-weight: 600;
+  color: #032b41;
+}
+
+/* 📱 Stack on smaller screens */
+@media (max-width: 768px) {
+  .features {
+    flex-wrap: wrap;            /* allow wrapping only when screen is small */
+    gap: 40px;
+  }
+}
+
+
+
+/* 🟩 PLAN CARDS */
+.plan-card {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 400px;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.plan-card:hover {
+  background-color: #f9fafb;
+}
+
+.plan-card.active {
+  border-color: #22c55e;
+  background-color: #ecfdf5;
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-name {
+  font-weight: 600;
+}
+
+.plan-price {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.plan-desc {
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* ❓ FAQ SECTION */
+.faq-section {
+  max-width: 700px;
+  width: 100%;
+  margin-top: 60px;
+  padding: 0 20px;
+}
+
+.faq-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Accordion */
+.accordion-item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+}
+
+.accordion-btn {
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  color: #032b41;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.accordion-toggle {
+  color: #9ca3af;
+  font-size: 1.3rem;
+}
+
+.accordion-answer {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ⚪ FOOTER STYLES */
+.footer {
+  width: 100%;
+  background-color: #f5f9f8;
+  padding: 60px 20px 30px;
+  color: #032b41;
+  font-family: "Inter", sans-serif;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  text-align: left;
+}
+
+.footer-col h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  font-size: 0.88rem;
+  color: #425466;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-col ul li:hover {
+  color: #0365f2;
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #032b41;
+  font-weight: 500;
+  margin-top: 20px;
+}

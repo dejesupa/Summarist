@@ -1,0 +1,114 @@
+/* =====================
+   SIDEBAR CONTAINER
+   ===================== */
+.sidebar {
+  background-color: #f7faf9;
+  width: 200px;
+  min-width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #e3e6e8;
+  overflow-y: auto;
+}
+
+/* =====================
+   LOGO AREA
+   ===================== */
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sidebar__logo img {
+  width: 140px;
+  height: auto;
+}
+
+/* =====================
+   NAVIGATION LINKS
+   ===================== */
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  color: #032b41;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding-left: 16px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.sidebar__link:hover {
+  color: #0365f2;
+  background-color: #e8f0ee;
+}
+
+.sidebar__link.active {
+  color: #0365f2;
+  font-weight: 600;
+  position: relative;
+}
+
+.sidebar__link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #0365f2;
+  border-radius: 2px;
+}
+
+/* =====================
+   ICON WRAPPER
+   ===================== */
+.sidebar__icon--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: #032b41;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.sidebar__link:hover .sidebar__icon--wrapper,
+.sidebar__link.active .sidebar__icon--wrapper {
+  color: #0365f2;
+}
+
+/* =====================
+   BOTTOM SECTION
+   ===================== */
+.sidebar__bottom {
+  border-top: 1px solid #e3e6e8;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 15px;
+  color: #032b41;
+}

@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation"; // 👈 add this
 import { AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import Image from "next/image";
+import { useAuth } from "../context/AuthContext";
+
 
 export default function LoginModal({ isOpen, onClose }) {
     const router = useRouter();
+    const { setIsLoggedIn, redirectPath, setRedirectPath } = useAuth();
+
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,23 +20,32 @@ export default function LoginModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const guestEmail = "guest@gmail.com";
-    const guestPass = "guest123";
+  const guestEmail = "guest@gmail.com";
+  const guestPass = "guest123";
 
-    if (!email.includes("@")) {
-      setError("Invalid email address");
-    } else if (password.length < 6) {
-      setError("Password must be at least 6 characters");
-    } else if (email === guestEmail && password === guestPass) {
-      alert("Login successful!");
-      onClose();
-      router.push("/for-you");
-    } else {
-      setError("User not found or wrong credentials");
-    }
-  };
+  if (!email.includes("@")) {
+    setError("Invalid email address");
+  } else if (password.length < 6) {
+    setError("Password must be at least 6 characters");
+  } else if (email === guestEmail && password === guestPass) {
+    alert("Login successful!");
+    setIsLoggedIn(true);
+    onClose();
+
+    // 🚀 Continue to intended page if any
+    if (redirectPath) {
+  router.push(redirectPath);
+  setRedirectPath(null);
+} else {
+  // 🟩 Default fallback redirect
+  router.push("/for-you");
+}
+  } else {
+    setError("User not found or wrong credentials");
+  }
+};
 
   return (
     // ⬇️ Light gray transparent background
@@ -55,16 +68,22 @@ export default function LoginModal({ isOpen, onClose }) {
         {/* 🟦 Login as Guest */}
         {!isRegister && (
           <button
-            onClick={() => {
-              alert("Guest login successful!");
-              onClose();
-              router.push("/for-you");
-            }}
-            className="flex items-center justify-center gap-2 w-full bg-[#3b5998] hover:bg-[#334f88] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
-          >
-            <FaUser className="text-white text-[14px]" />
-            Login as a Guest
-          </button>
+  onClick={() => {
+    alert("Guest login successful!");
+    setIsLoggedIn(true);
+    onClose();
+
+    // 🚀 Continue to intended page if any
+    if (redirectPath) {
+      router.push(redirectPath);
+      setRedirectPath(null);
+    }
+  }}
+  className="flex items-center justify-center gap-2 w-full bg-[#3b5998] hover:bg-[#334f88] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
+>
+  <FaUser className="text-white text-[14px]" />
+  Login as a Guest
+</button>
         )}
 
         {/* Divider */}
