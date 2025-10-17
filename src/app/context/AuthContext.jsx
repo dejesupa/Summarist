@@ -6,7 +6,13 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [redirectPath, setRedirectPath] = useState(null); // ✅ store where user should go after login
+  const [redirectPath, setRedirectPath] = useState(null);
+  
+  // 🆕 Add user info
+  const [user, setUser] = useState({
+    email: "",
+    plan: "basic", // can be 'basic', 'premium', or 'premium-plus'
+  });
 
   return (
     <AuthContext.Provider
@@ -16,7 +22,9 @@ export function AuthProvider({ children }) {
         isSubscribed,
         setIsSubscribed,
         redirectPath,
-        setRedirectPath, // 🟢 Add this line so BookPage can use it
+        setRedirectPath,
+        user,
+        setUser, // 🆕 make setter available globally
       }}
     >
       {children}

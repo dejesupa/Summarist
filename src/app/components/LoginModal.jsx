@@ -10,7 +10,8 @@ import { useAuth } from "../context/AuthContext";
 
 export default function LoginModal({ isOpen, onClose }) {
     const router = useRouter();
-    const { setIsLoggedIn, redirectPath, setRedirectPath } = useAuth();
+   const { setIsLoggedIn, setUser, redirectPath, setRedirectPath } = useAuth();
+
 
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
@@ -30,9 +31,18 @@ export default function LoginModal({ isOpen, onClose }) {
   } else if (password.length < 6) {
     setError("Password must be at least 6 characters");
   } else if (email === guestEmail && password === guestPass) {
-    alert("Login successful!");
-    setIsLoggedIn(true);
-    onClose();
+  alert("Login successful!");
+  setIsLoggedIn(true);
+
+  // ✅ Save user info
+  setUser({
+    email,
+    plan: "basic", // or "premium" later when subscribed
+  });
+
+  onClose();
+
+
 
     // 🚀 Continue to intended page if any
     if (redirectPath) {
@@ -65,13 +75,20 @@ export default function LoginModal({ isOpen, onClose }) {
           {isRegister ? "Sign up to Summarist" : "Log in to Summarist"}
         </h2>
 
-        {/* 🟦 Login as Guest */}
-        {!isRegister && (
-          <button
-  onClick={() => {
-    alert("Guest login successful!");
-    setIsLoggedIn(true);
-    onClose();
+ {/* 🟦 Login as Guest */}
+{!isRegister && (
+  <button
+    onClick={() => {
+      alert("Guest login successful!");
+      setIsLoggedIn(true);
+
+      // ✅ Save guest user info into AuthContext
+      setUser({
+        email: "guest@gmail.com",
+        plan: "basic", // default until they upgrade
+      });
+
+      onClose();
 
     // 🚀 Continue to intended page if any
     if (redirectPath) {
