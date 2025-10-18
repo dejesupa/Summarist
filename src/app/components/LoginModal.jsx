@@ -45,12 +45,12 @@ export default function LoginModal({ isOpen, onClose }) {
 
 
     // 🚀 Continue to intended page if any
-    if (redirectPath) {
+  if (redirectPath) {
   router.push(redirectPath);
   setRedirectPath(null);
 } else {
-  // 🟩 Default fallback redirect
-  router.push("/for-you");
+  // 🟢 Stay on the same page (like /settings)
+  router.refresh();
 }
   } else {
     setError("User not found or wrong credentials");

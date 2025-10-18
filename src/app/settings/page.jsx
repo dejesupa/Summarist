@@ -4,10 +4,22 @@ import Image from "next/image";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import LoginModal from "../components/LoginModal";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 
 export default function SettingsPage() {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, setRedirectPath } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
+
+  const router = useRouter();
+
+useEffect(() => {
+  if (isLoggedIn) {
+    router.refresh(); // 🟢 instantly re-render page content when user logs in
+  }
+}, [isLoggedIn, router]);
+
 
   // If user is NOT logged in → show login image
   if (!isLoggedIn) {
@@ -29,7 +41,10 @@ export default function SettingsPage() {
           </p>
 
           <button
-            onClick={() => setShowLogin(true)}
+            onClick={() => {
+              setRedirectPath("/settings"); // 👈 ensure login returns here
+              setShowLogin(true);
+            }}
             className="bg-[#2BD97C] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#27c06d] transition"
           >
             Login
