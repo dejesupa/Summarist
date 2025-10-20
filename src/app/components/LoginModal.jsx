@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // 👈 add this
+import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import Image from "next/image";
 import { useAuth } from "../context/AuthContext";
 
-
 export default function LoginModal({ isOpen, onClose }) {
-    const router = useRouter();
-   const { setIsLoggedIn, setUser, redirectPath, setRedirectPath } = useAuth();
-
+  const router = useRouter();
+  const { setIsLoggedIn, setUser, redirectPath, setRedirectPath } = useAuth();
 
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
@@ -21,46 +19,44 @@ export default function LoginModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const guestEmail = "guest@gmail.com";
-  const guestPass = "guest123";
+    const guestEmail = "guest@gmail.com";
+    const guestPass = "guest123";
 
-  if (!email.includes("@")) {
-    setError("Invalid email address");
-  } else if (password.length < 6) {
-    setError("Password must be at least 6 characters");
-  } else if (email === guestEmail && password === guestPass) {
-  alert("Login successful!");
-  setIsLoggedIn(true);
+    if (!email.includes("@")) {
+      setError("Invalid email address");
+    } else if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+    } else if (email === guestEmail && password === guestPass) {
+      alert("Login successful!");
+      setIsLoggedIn(true);
 
-  // ✅ Save user info
-  setUser({
-    email,
-    plan: "basic", // or "premium" later when subscribed
-  });
+      // ✅ Save user info
+      setUser({
+        email,
+        plan: "basic",
+      });
 
-  onClose();
+      // Close modal first
+      onClose();
 
-
-
-    // 🚀 Continue to intended page if any
-  if (redirectPath) {
-  router.push(redirectPath);
-  setRedirectPath(null);
-} else {
-  // 🟢 Stay on the same page (like /settings)
-  router.refresh();
-}
-  } else {
-    setError("User not found or wrong credentials");
-  }
-};
+      // 🚀 Redirect user after modal closes
+      setTimeout(() => {
+        if (redirectPath) {
+          router.push(redirectPath);
+          setRedirectPath(null);
+        } else {
+          router.push("/for-you"); // ✅ Always go to /for-you as fallback
+        }
+      }, 300);
+    } else {
+      setError("User not found or wrong credentials");
+    }
+  };
 
   return (
-    // ⬇️ Light gray transparent background
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-40 z-50">
-      {/* Modal Box */}
       <div className="bg-white w-[340px] rounded-md p-6 relative shadow-lg text-center">
         {/* ❌ Close Button */}
         <button
@@ -70,37 +66,37 @@ export default function LoginModal({ isOpen, onClose }) {
           <AiOutlineClose size={18} />
         </button>
 
-        {/* 🧠 Title */}
         <h2 className="font-semibold text-[15px] text-[#032b41] mb-5">
           {isRegister ? "Sign up to Summarist" : "Log in to Summarist"}
         </h2>
 
- {/* 🟦 Login as Guest */}
-{!isRegister && (
-  <button
-    onClick={() => {
-      alert("Guest login successful!");
-      setIsLoggedIn(true);
+        {/* 🟦 Login as Guest */}
+        {!isRegister && (
+          <button
+            onClick={() => {
+              alert("Guest login successful!");
+              setIsLoggedIn(true);
+              setUser({
+                email: "guest@gmail.com",
+                plan: "basic",
+              });
 
-      // ✅ Save guest user info into AuthContext
-      setUser({
-        email: "guest@gmail.com",
-        plan: "basic", // default until they upgrade
-      });
+              onClose();
 
-      onClose();
-
-    // 🚀 Continue to intended page if any
-    if (redirectPath) {
-      router.push(redirectPath);
-      setRedirectPath(null);
-    }
-  }}
-  className="flex items-center justify-center gap-2 w-full bg-[#3b5998] hover:bg-[#334f88] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
->
-  <FaUser className="text-white text-[14px]" />
-  Login as a Guest
-</button>
+              setTimeout(() => {
+                if (redirectPath) {
+                  router.push(redirectPath);
+                  setRedirectPath(null);
+                } else {
+                  router.push("/for-you");
+                }
+              }, 300);
+            }}
+            className="flex items-center justify-center gap-2 w-full bg-[#3b5998] hover:bg-[#334f88] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
+          >
+            <FaUser className="text-white text-[14px]" />
+            Login as a Guest
+          </button>
         )}
 
         {/* Divider */}
@@ -109,7 +105,7 @@ export default function LoginModal({ isOpen, onClose }) {
           <span className="absolute bg-white text-gray-500 text-xs px-2">or</span>
         </div>
 
-        {/* 🟦 Login with Google */}
+        {/* 🟦 Google Login */}
         <button
           type="button"
           className="flex items-center justify-center gap-2 w-full bg-[#4285F4] hover:bg-[#357ae8] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
@@ -146,9 +142,10 @@ export default function LoginModal({ isOpen, onClose }) {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {error && <p className="text-red-500 text-[12px] mb-2">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-[12px] mb-2">{error}</p>
+          )}
 
-          {/* 🟩 Green Login/Signup Button */}
           <button
             type="submit"
             className="w-full bg-[#2BD97C] hover:bg-[#20ba68] text-[#032b41] font-semibold text-[13.5px] py-2.5 rounded mb-3 transition-all duration-200"
@@ -157,14 +154,12 @@ export default function LoginModal({ isOpen, onClose }) {
           </button>
         </form>
 
-        {/* Forgot Password */}
         {!isRegister && (
           <p className="text-[12px] text-[#0365f2] mb-2 cursor-pointer hover:underline">
             Forgot your password?
           </p>
         )}
 
-        {/* Switch Between Login and Sign Up */}
         <p className="text-[12.5px] text-gray-600">
           {isRegister ? (
             <>

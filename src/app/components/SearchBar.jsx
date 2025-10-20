@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import "./SearchBar.css"; // 👈 import your CSS file
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
@@ -9,7 +10,6 @@ export default function SearchBar() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // 🧩 Fetch matching books when user types
   useEffect(() => {
     if (search.trim() === "") {
       setResults([]);
@@ -20,9 +20,8 @@ export default function SearchBar() {
       try {
         setLoading(true);
         const res = await fetch(
-          `https://us-central1-summaristt.cloudfunctions.net/getBooksByCategoryOrTitle?search=${search}`
+          `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${search}`
         );
-
         if (!res.ok) throw new Error("Failed to fetch search results");
         const data = await res.json();
         setResults(data);
@@ -31,12 +30,11 @@ export default function SearchBar() {
       } finally {
         setLoading(false);
       }
-    }, 400); // ⏳ Debounce typing
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [search]);
 
-  // 🧭 Navigate to book page
   const handleSelect = (id) => {
     setSearch("");
     setResults([]);
@@ -44,58 +42,57 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="search-wrapper">
-      {/* 🔍 Input Field */}
-      <div className="search__container">
+    <div className="searchbar-container">
+      {/* 🔍 Input field */}
+      <div className="searchbar-input-wrapper">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.8"
+          stroke="currentColor"
+          className="searchbar-icon"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
+          />
+        </svg>
         <input
           type="text"
           placeholder="Search for books"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="search__input"
+          className="searchbar-input"
         />
-        <div className="search__icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.8"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
-            />
-          </svg>
-        </div>
       </div>
 
       {/* 📚 Dropdown results */}
       {search && (
-        <div className="search-dropdown">
+        <div className="searchbar-dropdown">
           {loading ? (
-            <p className="search-loading">Searching...</p>
+            <p className="searchbar-message">Searching...</p>
           ) : results.length > 0 ? (
             results.map((book) => (
               <div
                 key={book.id}
-                className="search-result"
                 onClick={() => handleSelect(book.id)}
+                className="searchbar-item"
               >
                 <img
                   src={book.imageLink}
                   alt={book.title}
-                  className="search-thumb"
+                  className="searchbar-thumb"
                 />
                 <div>
-                  <p className="search-title">{book.title}</p>
-                  <p className="search-author">{book.author}</p>
+                  <p className="searchbar-title">{book.title}</p>
+                  <p className="searchbar-author">{book.author}</p>
                 </div>
               </div>
             ))
           ) : (
-            <p className="search-no-results">No books found</p>
+            <p className="searchbar-message">No books found</p>
           )}
         </div>
       )}

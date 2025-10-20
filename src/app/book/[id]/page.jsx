@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useAuth } from "../../context/AuthContext";
 import LoginModal from "../../components/LoginModal";
 import "./BookPage.css";
+import SkeletonLoader from "../../components/SkeletonLoader";
 
 export default function BookPage() {
   const { id } = useParams();
@@ -36,7 +37,35 @@ export default function BookPage() {
     if (id) fetchBook();
   }, [id]);
 
-  if (loading) return <p className="loading-text">Loading...</p>;
+  if (loading) {
+  return (
+    <div className="flex flex-col items-center justify-center py-10 px-6 text-[#032b41]">
+      {/* Top section skeleton */}
+      <div className="flex justify-between w-full max-w-[900px] mb-10">
+        <div className="flex flex-col gap-3 w-[55%]">
+          <SkeletonLoader width="70%" height="22px" />
+          <SkeletonLoader width="50%" height="18px" />
+          <SkeletonLoader width="90%" height="14px" />
+          <SkeletonLoader width="80%" height="14px" />
+          <div className="flex gap-4 mt-2">
+            <SkeletonLoader width="100px" height="32px" rounded="full" />
+            <SkeletonLoader width="100px" height="32px" rounded="full" />
+          </div>
+        </div>
+        <SkeletonLoader width="240px" height="340px" rounded="md" />
+      </div>
+
+      {/* Bottom description skeleton */}
+      <div className="w-full max-w-[900px] flex flex-col gap-3">
+        <SkeletonLoader width="40%" height="18px" />
+        {[...Array(6)].map((_, i) => (
+          <SkeletonLoader key={i} width="100%" height="14px" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
   if (error) return <p className="error-text">{error}</p>;
   if (!book) return <p className="error-text">Book not found</p>;
 
@@ -82,31 +111,6 @@ const handleReadOrListen = () => {
   // 🧱 Render (your original layout preserved)
   return (
     <>
-      {/* 🔍 Search Bar */}
-      <div className="search-header">
-        <div className="search__container">
-          <input
-            type="text"
-            placeholder="Search for books"
-            className="search__input"
-          />
-          <div className="search__icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.8"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
 
       {/* 🧩 Main Book Page */}
       <div className="book-page">

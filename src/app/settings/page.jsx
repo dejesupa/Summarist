@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoginModal from "../components/LoginModal";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import SkeletonLoader from "../components/SkeletonLoader";
 
 export default function SettingsPage() {
   const { isLoggedIn, user, setRedirectPath } = useAuth();
@@ -14,12 +13,18 @@ export default function SettingsPage() {
 
   const router = useRouter();
 
-useEffect(() => {
-  if (isLoggedIn) {
-    router.refresh(); // 🟢 instantly re-render page content when user logs in
-  }
-}, [isLoggedIn, router]);
+  // 🟢 NEW: add local loading state for skeleton
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.refresh(); // instantly refreshes content
+    }
+
+    // simulate short load delay
+    const timer = setTimeout(() => setLoading(false), 600);
+    return () => clearTimeout(timer);
+  }, [isLoggedIn, router]);
 
   // If user is NOT logged in → show login image
   if (!isLoggedIn) {
@@ -51,11 +56,27 @@ useEffect(() => {
           </button>
         </div>
 
-        {/* 🟢 Always render modal here so it's available */}
         {showLogin && (
           <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
         )}
       </>
+    );
+  }
+
+  // 🟢 NEW: show skeleton loader before rendering user info
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#f9f9f9] px-6">
+        <h1 className="text-3xl font-bold text-[#032b41] mb-10">Settings</h1>
+
+        <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md text-center border border-gray-200 space-y-4 animate-pulse">
+          <SkeletonLoader width="60%" height="20px" />
+          <SkeletonLoader width="40%" height="16px" />
+          <SkeletonLoader width="80%" height="14px" />
+          <SkeletonLoader width="50%" height="14px" />
+          <SkeletonLoader width="100%" height="36px" rounded="md" />
+        </div>
+      </div>
     );
   }
 
@@ -119,7 +140,6 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* 🟢 Also render modal here for safety */}
       {showLogin && (
         <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
       )}

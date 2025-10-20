@@ -52,7 +52,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 80px 60px 120px; /* bottom padding for audio bar space */
+  padding: 40px 60px 120px; /* bottom padding for audio bar space */
   box-sizing: border-box;
 }
 

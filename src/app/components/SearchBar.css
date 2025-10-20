@@ -1,0 +1,97 @@
+.searchbar-container {
+  position: relative;
+  width: 280px;
+  max-width: 320px;
+}
+
+.searchbar-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  padding: 8px 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchbar-input-wrapper:focus-within {
+  border-color: #0365f2;
+  box-shadow: 0 0 0 2px rgba(3, 101, 242, 0.2);
+}
+
+.searchbar-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.searchbar-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #032b41;
+  background: transparent;
+}
+
+.searchbar-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Dropdown results */
+.searchbar-dropdown {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.searchbar-message {
+  text-align: center;
+  color: #6b7280;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.searchbar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.searchbar-item:hover {
+  background: #f9fafb;
+}
+
+.searchbar-thumb {
+  width: 32px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.searchbar-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #032b41;
+  margin-bottom: 2px;
+}
+
+.searchbar-author {
+  font-size: 12px;
+  color: #6b7280;
+}

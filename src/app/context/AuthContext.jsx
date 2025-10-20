@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -7,12 +7,35 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [redirectPath, setRedirectPath] = useState(null);
-  
-  // 🆕 Add user info
   const [user, setUser] = useState({
     email: "",
-    plan: "basic", // can be 'basic', 'premium', or 'premium-plus'
+    plan: "basic",
   });
+
+  // 🆕 Load data from localStorage on first load
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("isLoggedIn");
+
+    if (storedUser && loggedIn === "true") {
+      setUser(JSON.parse(storedUser));
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  // 🆕 Save to localStorage whenever user or login status changes
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [isLoggedIn, user]);
+
+  // 🆕 Optional: Add a logout function
+  const logout = () => {
+    setIsLoggedIn(false);
+    setUser({ email: "", plan: "basic" });
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("user");
+  };
 
   return (
     <AuthContext.Provider
@@ -24,7 +47,8 @@ export function AuthProvider({ children }) {
         redirectPath,
         setRedirectPath,
         user,
-        setUser, // 🆕 make setter available globally
+        setUser,
+        logout, // 🆕 export logout globally
       }}
     >
       {children}

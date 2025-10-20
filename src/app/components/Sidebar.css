@@ -112,3 +112,32 @@
   font-size: 15px;
   color: #032b41;
 }
+
+/* =====================
+   DISABLED LINKS (Highlights, Search, Help)
+   ===================== */
+.sidebar__link--disabled {
+  color: #9ca3af; /* muted gray */
+  cursor: not-allowed;
+  user-select: none;
+  pointer-events: none;
+  background: transparent;
+}
+
+.sidebar__link--disabled .sidebar__icon--wrapper {
+  color: #9ca3af;
+}
+
+/* =====================
+   ACTIVE LINK FIX (ensure visual consistency)
+   ===================== */
+.sidebar__link.active {
+  color: #0365f2;
+  font-weight: 600;
+  background-color: #e8f0ee;
+}
+
+.sidebar__link.active .sidebar__icon--wrapper {
+  color: #0365f2;
+}
+

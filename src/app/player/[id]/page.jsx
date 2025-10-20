@@ -70,6 +70,25 @@ export default function PlayerPage() {
     }
   };
 
+  // ✅ When the audio ends, mark book as finished
+const handleAudioEnd = () => {
+  if (!book) return;
+
+  // Get existing finished books
+  const finished = JSON.parse(localStorage.getItem("finishedBooks") || "[]");
+
+  // Avoid duplicates
+  const alreadyExists = finished.some((b) => b.id === book.id);
+  if (alreadyExists) return;
+
+  // Add the finished book
+  finished.push(book);
+  localStorage.setItem("finishedBooks", JSON.stringify(finished));
+
+  alert(`✅ "${book.title}" has been marked as finished!`);
+};
+
+
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
@@ -83,10 +102,6 @@ export default function PlayerPage() {
   return (
   <>
     <div className="player-container">
-      {/* 🔍 Search Bar */}
-      <div className="search-header">
-        {/* ... your existing search input ... */}
-      </div>
 
       {/* 📘 Book Title */}
       <h1 className="player-title">{book.title}</h1>
@@ -200,11 +215,13 @@ export default function PlayerPage() {
 
       {/* Hidden audio element */}
       <audio
-        ref={audioRef}
-        src={book.audioLink}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-      />
+  ref={audioRef}
+  src={book.audioLink}
+  onTimeUpdate={handleTimeUpdate}
+  onLoadedMetadata={handleLoadedMetadata}
+  onEnded={handleAudioEnd} // 👈 this line is new
+/>
+
     </div>
   </>
 );
