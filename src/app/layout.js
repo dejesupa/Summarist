@@ -1,7 +1,7 @@
 import "./globals.css";
 import "./style.css";
 import { AuthProvider } from "./context/AuthContext";
-import ClientLayout from "./ClientLayout"; // 👈 import the new wrapper
+import ClientLayout from "./ClientLayout";
 
 export const metadata = {
   title: "Summarist",

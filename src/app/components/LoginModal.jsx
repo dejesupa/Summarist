@@ -32,7 +32,7 @@ export default function LoginModal({ isOpen, onClose }) {
       alert("Login successful!");
       setIsLoggedIn(true);
 
-      // ✅ Save user info
+      //  Save user info
       setUser({
         email,
         plan: "basic",
@@ -41,13 +41,13 @@ export default function LoginModal({ isOpen, onClose }) {
       // Close modal first
       onClose();
 
-      // 🚀 Redirect user after modal closes
+      //  Redirect user after modal closes
       setTimeout(() => {
         if (redirectPath) {
           router.push(redirectPath);
           setRedirectPath(null);
         } else {
-          router.push("/for-you"); // ✅ Always go to /for-you as fallback
+          router.push("/for-you"); 
         }
       }, 300);
     } else {
@@ -58,7 +58,7 @@ export default function LoginModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-40 z-50">
       <div className="bg-white w-[340px] rounded-md p-6 relative shadow-lg text-center">
-        {/* ❌ Close Button */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-400 hover:text-black"
@@ -70,7 +70,7 @@ export default function LoginModal({ isOpen, onClose }) {
           {isRegister ? "Sign up to Summarist" : "Log in to Summarist"}
         </h2>
 
-        {/* 🟦 Login as Guest */}
+        {/* Login as Guest */}
         {!isRegister && (
           <button
             onClick={() => {
@@ -105,7 +105,7 @@ export default function LoginModal({ isOpen, onClose }) {
           <span className="absolute bg-white text-gray-500 text-xs px-2">or</span>
         </div>
 
-        {/* 🟦 Google Login */}
+        {/*  Google Login */}
         <button
           type="button"
           className="flex items-center justify-center gap-2 w-full bg-[#4285F4] hover:bg-[#357ae8] text-white font-semibold py-2 rounded text-[13px] mb-3 transition-all duration-200"
@@ -125,7 +125,7 @@ export default function LoginModal({ isOpen, onClose }) {
           <span className="absolute bg-white text-gray-500 text-xs px-2">or</span>
         </div>
 
-        {/* 📝 Email + Password Inputs */}
+        {/*  Email + Password Inputs */}
         <form onSubmit={handleSubmit}>
           <input
             type="email"

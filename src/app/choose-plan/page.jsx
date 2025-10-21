@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useState, useTransition } from "react";
 
 export default function ChoosePlanPage() {
-  // ✅ 1. Define your state hooks first
+
   const [selectedPlan, setSelectedPlan] = useState("yearly");
   const [isPending, startTransition] = useTransition();
 
-  // ✅ 2. Then define handleCheckout() at the top level (not inside Accordion)
+
   async function handleCheckout(interval) {
     startTransition(async () => {
       try {
@@ -29,7 +29,6 @@ export default function ChoosePlanPage() {
     });
   }
 
-  // ✅ 3. Accordion should be below — handleCheckout should NOT be inside it
   function Accordion({ item }) {
     const [open, setOpen] = useState(false);
     return (
@@ -45,7 +44,7 @@ export default function ChoosePlanPage() {
 
   return (
     <div className="choose-plan">
-      {/* 🌊 Header Section */}
+      {/*  Header Section */}
       <div className="choose-plan__header">
         <div className="choose-plan__text">
           <h1>Get unlimited access to many amazing books to read</h1>
@@ -62,7 +61,7 @@ export default function ChoosePlanPage() {
         </div>
       </div>
 
-      {/* 💡 Features Section */}
+      {/*  Features Section */}
       <div className="features">
         <div className="feature">
           <div className="feature-icon">
@@ -98,7 +97,7 @@ export default function ChoosePlanPage() {
         </div>
       </div>
 
-      {/* 🟩 Yearly Plan */}
+      {/*  Yearly Plan */}
       <div
         onClick={() => {
           setSelectedPlan("yearly");
@@ -113,7 +112,7 @@ export default function ChoosePlanPage() {
         <p className="plan-desc">7-day free trial included</p>
       </div>
 
-      {/* 🟨 Monthly Plan */}
+      {/*  Monthly Plan */}
       <div
         onClick={() => {
           setSelectedPlan("monthly");
@@ -128,7 +127,7 @@ export default function ChoosePlanPage() {
         <p className="plan-desc">Cancel anytime</p>
       </div>
 
-      {/* ❓ FAQ Section */}
+      {/*  FAQ Section */}
       <div className="faq-section">
         <h2>Frequently Asked Questions</h2>
         {[
@@ -157,7 +156,7 @@ export default function ChoosePlanPage() {
         ))}
       </div>
 
-      {/* ⚪ Footer */}
+      {/*  Footer */}
       <footer className="footer">
         <div className="footer-columns">
           {/* (Footer columns unchanged) */}

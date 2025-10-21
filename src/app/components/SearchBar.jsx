@@ -43,7 +43,7 @@ export default function SearchBar() {
 
   return (
     <div className="searchbar-container">
-      {/* 🔍 Input field */}
+      {/*  Input field */}
       <div className="searchbar-input-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ export default function SearchBar() {
         />
       </div>
 
-      {/* 📚 Dropdown results */}
+      {/*  Dropdown results */}
       {search && (
         <div className="searchbar-dropdown">
           {loading ? (

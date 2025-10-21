@@ -31,7 +31,7 @@ export default function Sidebar() {
     <>
       <aside className="sidebar">
         <div>
-          {/* 🔷 Logo */}
+          {/*  Logo */}
           <Link href="/for-you" className="sidebar__logo">
             <Image
               src="/assets/logo.png"
@@ -42,7 +42,7 @@ export default function Sidebar() {
             />
           </Link>
 
-          {/* 🧭 Navigation */}
+          {/*  Navigation */}
           <nav className="sidebar__nav">
             <Link href="/for-you" className="sidebar__link">
               <span className="sidebar__icon--wrapper"><GoHome /></span>
@@ -68,7 +68,7 @@ export default function Sidebar() {
           </nav>
         </div>
 
-        {/* ⚙️ Bottom section */}
+        {/*  Bottom section */}
         <div className="sidebar__bottom">
           <Link href="/settings" className="sidebar__link">
             <span className="sidebar__icon--wrapper"><RiSettingsLine /></span>
@@ -102,7 +102,7 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      {/* 🟢 Modal */}
+      {/*  Modal */}
       {showLogin && (
         <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
       )}

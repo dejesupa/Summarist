@@ -13,15 +13,14 @@ export default function SettingsPage() {
 
   const router = useRouter();
 
-  // 🟢 NEW: add local loading state for skeleton
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (isLoggedIn) {
-      router.refresh(); // instantly refreshes content
+      router.refresh(); 
     }
 
-    // simulate short load delay
+ 
     const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, [isLoggedIn, router]);
@@ -47,7 +46,7 @@ export default function SettingsPage() {
 
           <button
             onClick={() => {
-              setRedirectPath("/settings"); // 👈 ensure login returns here
+              setRedirectPath("/settings"); 
               setShowLogin(true);
             }}
             className="bg-[#2BD97C] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#27c06d] transition"
@@ -63,7 +62,7 @@ export default function SettingsPage() {
     );
   }
 
-  // 🟢 NEW: show skeleton loader before rendering user info
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#f9f9f9] px-6">

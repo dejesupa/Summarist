@@ -61,7 +61,7 @@ export default function ForYouPage() {
     <div className="flex min-h-screen bg-[#f9f9f9] text-[#032b41]">
       <div className="flex-1 flex flex-col items-center py-10">
         <div className="w-full max-w-[1100px] px-4 sm:px-6 lg:px-8 flex flex-col gap-20">
-          {/* 🟨 Selected just for you */}
+          {/* Selected just for you */}
           <section className="mb-10">
             <h2 className="text-[18px] sm:text-[20px] md:text-[22px] font-bold text-[#032b41] mb-4">
               Selected just for you
@@ -136,7 +136,7 @@ export default function ForYouPage() {
             )}
           </section>
 
-          {/* 📚 Recommended for You */}
+          {/*  Recommended for You */}
           <section>
             <h2 className="text-[18px] sm:text-[20px] md:text-[22px] font-bold text-[#032b41] mb-4">
               Recommended For You
@@ -199,7 +199,7 @@ export default function ForYouPage() {
             )}
           </section>
 
-          {/* 🟦 Suggested Books */}
+          {/*  Suggested Books */}
           <section>
             <h2 className="text-[18px] sm:text-[20px] md:text-[22px] font-bold text-[#032b41] mb-4">
               Suggested Books

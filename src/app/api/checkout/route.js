@@ -19,11 +19,11 @@ export async function POST(req) {
       line_items: [{ price: priceId, quantity: 1 }],
       allow_promotion_codes: true,
 
-      // ✅ Redirect to Settings page after successful payment
+      // Redirect to Settings page after successful payment
       success_url: `${origin}/settings?status=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/choose-plan`,
 
-      // ✅ Include 7-day trial for yearly plan
+      //  Include 7-day trial for yearly plan
       subscription_data:
         interval === "year" ? { trial_period_days: 7 } : undefined,
     });

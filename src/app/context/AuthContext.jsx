@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     plan: "basic",
   });
 
-  // 🆕 Load data from localStorage on first load
+  //  Load data from localStorage on first load
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const loggedIn = localStorage.getItem("isLoggedIn");
@@ -23,13 +23,13 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // 🆕 Save to localStorage whenever user or login status changes
+  //  Save to localStorage whenever user or login status changes
   useEffect(() => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
     localStorage.setItem("user", JSON.stringify(user));
   }, [isLoggedIn, user]);
 
-  // 🆕 Optional: Add a logout function
+  // logout function
   const logout = () => {
     setIsLoggedIn(false);
     setUser({ email: "", plan: "basic" });

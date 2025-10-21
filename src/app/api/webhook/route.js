@@ -26,16 +26,16 @@ export async function POST(req) {
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error("❌ Webhook verification failed:", err.message);
+    console.error(" Webhook verification failed:", err.message);
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
 
-  // ✅ Handle successful checkout
+  //  Handle successful checkout
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-    console.log("💰 Payment successful for:", session.customer_email);
+    console.log(" Payment successful for:", session.customer_email);
 
-    // 🟢 TEMP: simulate saving plan to a JSON file (like a database)
+    //  TEMP: simulate saving plan to a JSON file (like a database)
     const dataPath = path.join(process.cwd(), "userData.json");
     const userData = {
       email: session.customer_email,
@@ -43,7 +43,7 @@ export async function POST(req) {
     };
 
     fs.writeFileSync(dataPath, JSON.stringify(userData, null, 2));
-    console.log("📝 User plan updated to premium!");
+    console.log(" User plan updated to premium!");
   }
 
   return NextResponse.json({ received: true });

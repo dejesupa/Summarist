@@ -48,7 +48,6 @@
   gap: 80px;                    /* space between each feature */
   text-align: center;
   margin-top: 100px;
-  flex-wrap: nowrap;            /* keep all in one row */
 }
 
 .feature {

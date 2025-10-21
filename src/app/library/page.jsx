@@ -10,7 +10,7 @@ export default function LibraryPage() {
   const [finishedBooks, setFinishedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🧠 Fetch books from localStorage
+  //  Fetch books from localStorage
   useEffect(() => {
     const loadLibrary = () => {
       const saved = JSON.parse(localStorage.getItem("myLibrary") || "[]");
@@ -24,7 +24,7 @@ export default function LibraryPage() {
     setTimeout(loadLibrary, 600);
   }, []);
 
-  // 🦴 Skeleton Loader View
+  //  Skeleton Loader View
   if (loading) {
     return (
       <div className="flex flex-col items-center bg-[#f9f9f9] text-[#032b41] min-h-screen py-12">
@@ -67,7 +67,7 @@ export default function LibraryPage() {
     );
   }
 
-  // 🧩 Empty State (no books)
+  //  Empty State (no books)
   if (savedBooks.length === 0 && finishedBooks.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-center bg-[#f9f9f9] text-[#032b41]">
@@ -91,7 +91,7 @@ export default function LibraryPage() {
     );
   }
 
-  // ✅ Main Render (real data)
+  //  Main Render (real data)
   return (
     <div className="flex flex-col items-center bg-[#f9f9f9] text-[#032b41] min-h-screen py-12">
       <h1 className="text-3xl font-bold mb-10">My Library</h1>

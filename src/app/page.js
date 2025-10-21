@@ -13,7 +13,7 @@ export default function Page() {
 
   return (
     <main>
-      {/* ✅ NAVBAR */}
+      {/*  NAVBAR */}
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
@@ -40,7 +40,7 @@ export default function Page() {
         </div>
       </nav>
 
-      {/* ✅ HERO / LANDING */}
+      {/*  HERO / LANDING */}
       <section id="landing">
         <div className="container">
           <div className="row">
@@ -78,7 +78,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ✅ FEATURES SECTION */}
+      {/*  FEATURES SECTION */}
       <section id="features" className="container">
         <div className="row">
           <div className="section__title">Understand books in few minutes</div>
@@ -114,7 +114,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ✅ STATS ROW 1 */}
+          {/*  STATS ROW 1 */}
           <div className="statistics__wrapper">
             <div className="statistics__content--header">
               <div className="statistics__heading">Enhance your knowledge</div>
@@ -154,7 +154,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ✅ STATS ROW 2 */}
+          {/*  STATS ROW 2 */}
           <div className="statistics__wrapper">
             <div className="statistics__content--details statistics__content--details-second">
               <div className="statistics__data">
@@ -198,7 +198,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ✅ REVIEWS SECTION */}
+      {/*  REVIEWS SECTION */}
       <section id="reviews">
         <div className="row container">
           <div className="section__title">What our members say</div>
@@ -245,7 +245,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ✅ NUMBERS SECTION */}
+      {/*  NUMBERS SECTION */}
       <section id="numbers">
         <div className="container row">
           <div className="section__title">Start growing with Summarist now</div>
@@ -282,7 +282,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ✅ FOOTER */}
+      {/*  FOOTER */}
       <footer id="footer">
         <div className="container row">
           <div className="footer__top--wrapper">

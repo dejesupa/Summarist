@@ -12,13 +12,13 @@ export default function PlayerPage() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
 
-  // 🎧 Audio logic states
+  //  Audio logic states
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
-  // 🧠 Fetch book info
+  //  Fetch book info
   useEffect(() => {
     async function fetchBook() {
       try {
@@ -38,7 +38,7 @@ export default function PlayerPage() {
     if (id) fetchBook();
   }, [id]);
 
-  // 🎧 Handlers
+  //  Handlers
   const handlePlayPause = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -70,7 +70,7 @@ export default function PlayerPage() {
     }
   };
 
-  // ✅ When the audio ends, mark book as finished
+  //  When the audio ends, mark book as finished
 const handleAudioEnd = () => {
   if (!book) return;
 
@@ -103,14 +103,14 @@ const handleAudioEnd = () => {
   <>
     <div className="player-container">
 
-      {/* 📘 Book Title */}
+      {/*  Book Title */}
       <h1 className="player-title">{book.title}</h1>
 
-      {/* 🧾 Summary */}
+      {/*  Summary */}
       <p className="player-summary">{book.summary}</p>
     </div>
 
-    {/* 🎧 Audio Player (moved outside container for full width) */}
+    {/*  Audio Player (moved outside container */}
     <div className="player-bar">
       <div className="player-left">
         <Image
@@ -219,7 +219,7 @@ const handleAudioEnd = () => {
   src={book.audioLink}
   onTimeUpdate={handleTimeUpdate}
   onLoadedMetadata={handleLoadedMetadata}
-  onEnded={handleAudioEnd} // 👈 this line is new
+  onEnded={handleAudioEnd} 
 />
 
     </div>

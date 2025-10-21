@@ -11,13 +11,13 @@ import SkeletonLoader from "../../components/SkeletonLoader";
 export default function BookPage() {
   const { id } = useParams();
   const router = useRouter();
-  const { isLoggedIn, isSubscribed, setRedirectPath } = useAuth(); // ✅ auth context
+  const { isLoggedIn, isSubscribed, setRedirectPath } = useAuth(); //  auth context
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  // 🧠 Fetch book data
+  //  Fetch book data
   useEffect(() => {
     async function fetchBook() {
       try {
@@ -69,10 +69,10 @@ export default function BookPage() {
   if (error) return <p className="error-text">{error}</p>;
   if (!book) return <p className="error-text">Book not found</p>;
 
-  // 🧩 Handlers
+  //  Handlers
 const handleReadOrListen = () => {
   if (!isLoggedIn) {
-    // 🧠 Remember what the user wanted to do (redirect after login)
+    // Remember what users want (redirect after login)
     setRedirectPath(
       book.subscriptionRequired ? "/choose-plan" : `/player/${book.id}`
     );
@@ -80,11 +80,11 @@ const handleReadOrListen = () => {
     return;
   }
 
-  // ✅ B.ii logic — Free book or subscribed user
+  //  B.ii logic — Free book or subscribed user
   if (!book.subscriptionRequired || isSubscribed) {
     router.push(`/player/${book.id}`);
   } 
-  // 💎 Premium book but user not subscribed
+  //  Premium book but user not subscribed
   else if (book.subscriptionRequired && !isSubscribed) {
     router.push("/choose-plan");
   }
@@ -108,11 +108,10 @@ const handleReadOrListen = () => {
     }
   };
 
-  // 🧱 Render (your original layout preserved)
   return (
     <>
 
-      {/* 🧩 Main Book Page */}
+      {/*  Main Book Page */}
       <div className="book-page">
         <div className="book-page__top">
           {/* LEFT — Book Details */}
@@ -163,7 +162,7 @@ const handleReadOrListen = () => {
           </div>
         </div>
 
-        {/* 📚 About Section */}
+        {/*  About Section */}
         <div className="book-page__bottom">
           <h2 className="section-title">What's it about?</h2>
           <div className="book-tags">
@@ -181,7 +180,7 @@ const handleReadOrListen = () => {
         </div>
       </div>
 
-      {/* 🟢 Auth Modal */}
+      {/*  Auth Modal */}
       {showModal && (
         <LoginModal isOpen={showModal} onClose={() => setShowModal(false)} />
       )}
